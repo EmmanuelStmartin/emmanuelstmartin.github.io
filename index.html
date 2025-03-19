@@ -152,3 +152,131 @@
     </script>
 </body>
 </html>
+<!-- Add this to your HTML -->
+<section id="cyber-skull">
+    <h3>Neural Hardware Interface Simulation</h3>
+    <div id="viz-container" style="height: 500px; position: relative;">
+        <div id="data-panel" style="position: absolute; right: 20px; top: 20px; background: rgba(0,0,0,0.7); padding: 1rem; border-radius: 8px;">
+            <h4 style="color: #E04831; margin: 0 0 1rem 0;">Live Telemetry</h4>
+            <div id="sensor-data"></div>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+// Simple skull geometry with hardware components
+function createCyberSkull() {
+    const scene = new THREE.Scene();
+    
+    // Base skull
+    const skullGeometry = new THREE.SphereGeometry(2, 32, 32);
+    const skullMaterial = new THREE.MeshPhongMaterial({
+        color: 0x444444,
+        emissive: 0xE04831,
+        emissiveIntensity: 0.3,
+        wireframe: true
+    });
+    const skull = new THREE.Mesh(skullGeometry, skullMaterial);
+    scene.add(skull);
+
+    // Neural processor
+    const cpuGeometry = new THREE.BoxGeometry(0.5, 0.5, 0.1);
+    const cpuMaterial = new THREE.MeshBasicMaterial({ 
+        color: 0xE04831,
+        transparent: true,
+        opacity: 0.8
+    });
+    const neuralCPU = new THREE.Mesh(cpuGeometry, cpuMaterial);
+    neuralCPU.position.set(0, 0.5, 1.8);
+    scene.add(neuralCPU);
+
+    // Sensor array
+    const sensors = new THREE.Group();
+    for(let i = 0; i < 8; i++) {
+        const sensor = new THREE.Mesh(
+            new THREE.SphereGeometry(0.1),
+            new THREE.MeshBasicMaterial({ color: 0xE04831 })
+        );
+        const angle = (i / 8) * Math.PI * 2;
+        sensor.position.set(Math.cos(angle)*1.5, Math.sin(angle)*1.5, 1.5);
+        sensors.add(sensor);
+    }
+    scene.add(sensors);
+
+    return scene;
+}
+
+// Initialize visualization
+const vizContainer = document.getElementById('viz-container');
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(vizContainer.offsetWidth, 500);
+vizContainer.prepend(renderer.domElement);
+
+const camera = new THREE.PerspectiveCamera(75, vizContainer.offsetWidth / 500, 0.1, 1000);
+camera.position.z = 5;
+
+const scene = createCyberSkull();
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+
+// Hardware telemetry data
+const sensors = {
+    neuralLoad: 0,
+    fpgaTemp: 45,
+    dataThroughput: 0
+};
+
+function updateTelemetry() {
+    sensors.neuralLoad = Math.random() * 100;
+    sensors.dataThroughput = Math.random() * 1e6;
+    document.getElementById('sensor-data').innerHTML = `
+        <div style="color: #E04831">Neural Load: ${sensors.neuralLoad.toFixed(1)}%</div>
+        <div>FPGA Temp: ${sensors.fpgaTemp.toFixed(1)}°C</div>
+        <div>Throughput: ${(sensors.dataThroughput/1e6).toFixed(2)} Gb/s</div>
+    `;
+}
+
+// Animation loop
+function animate() {
+    requestAnimationFrame(animate);
+    controls.update();
+    
+    // Animate components
+    scene.children[1].rotation.z += 0.01; // CPU rotation
+    scene.children[2].rotation.y += 0.02; // Sensors rotation
+    
+    renderer.render(scene, camera);
+    updateTelemetry();
+}
+
+// Handle window resize
+window.addEventListener('resize', () => {
+    camera.aspect = vizContainer.offsetWidth / 500;
+    camera.updateProjectionMatrix();
+    renderer.setSize(vizContainer.offsetWidth, 500);
+});
+
+animate();
+</script>
+
+<style>
+#cyber-skull {
+    margin: 4rem 0;
+    padding: 2rem 0;
+    border-top: 1px solid #E04831;
+    border-bottom: 1px solid #E04831;
+}
+
+#data-panel {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.9rem;
+    border: 1px solid rgba(224, 72, 49, 0.3);
+    backdrop-filter: blur(5px);
+}
+
+canvas {
+    border-radius: 8px;
+}
+</style>
