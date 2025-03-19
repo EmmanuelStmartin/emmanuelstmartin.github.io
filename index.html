@@ -3,124 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emmanuel StMartin | Full-Stack Engineer & ML Specialist</title>
+    <title>Emmanuel StMartin - Full Stack Engineer</title>
     <style>
         :root {
-            --primary: #2A9D8F;
-            --secondary: #264653;
-            --accent: #E9C46A;
+            --bg: #1a1a1a;
+            --text: #e6e6e6;
+            --accent: #4CAF50;
+            --link-underline: #4d4d4d;
         }
         body {
             font-family: 'Space Mono', monospace;
-            background: var(--secondary);
-            color: white;
-        }
-        .cyber-border {
-            border: 3px solid var(--primary);
-            position: relative;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
             padding: 2rem;
-            margin: 2rem 0;
-            background: rgba(0,0,0,0.7);
+            transition: background 0.3s, color 0.3s;
         }
-        .cyber-border::before {
-            content: '';
-            position: absolute;
-            top: -5px; left: -5px;
-            right: -5px; bottom: -5px;
-            z-index: -1;
-            background: linear-gradient(45deg, 
-                var(--primary), 
-                var(--accent), 
-                var(--primary));
+        body.light-mode {
+            --bg: #ffffff;
+            --text: #333333;
+            --link-underline: #cccccc;
         }
-        .skill-cloud {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 1rem;
-            padding: 2rem;
+        header { text-align: center; margin-bottom: 3rem; }
+        h1 { color: var(--accent); margin-bottom: 0; }
+        h2 { color: var(--text); margin-top: 0.5rem; opacity: 0.8; }
+        section { margin: 2rem 0; }
+        h3 { color: var(--accent); border-bottom: 2px solid var(--accent); padding-bottom: 0.5rem; }
+        .job { margin: 2rem 0; }
+        .date { color: var(--text); opacity: 0.7; font-size: 0.9em; }
+        ul { list-style: none; padding-left: 1rem; }
+        li::before { content: "▹"; color: var(--accent); padding-right: 0.5rem; }
+        a {
+            color: inherit;
+            text-decoration: none;
+            border-bottom: 1px solid var(--link-underline);
         }
-        .skill-chip {
-            background: var(--primary);
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: 1px solid var(--text);
+            color: var(--text);
+            padding: 0.5rem;
+            cursor: pointer;
+        }
+        .pdf-download {
+            display: inline-block;
+            margin: 1rem 0;
             padding: 0.5rem 1rem;
-            border-radius: 20px;
-            text-align: center;
-            transition: transform 0.3s;
-        }
-        .timeline {
-            border-left: 3px solid var(--primary);
-            padding-left: 2rem;
-            margin-left: 1rem;
+            background: var(--accent);
+            color: var(--bg);
+            border: none;
+            cursor: pointer;
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="cyber-border">
-        <h1>EMMANUEL ST.MARTIN</h1>
-        <h2>Full-Stack Engineer | Hardware Architect | ML Researcher</h2>
-        <nav>
-            <a href="#about">About</a>
-            <a href="#skills">Skills</a>
-            <a href="#experience">Experience</a>
-            <a href="#projects">Projects</a>
-        </nav>
+    <button class="theme-toggle" onclick="toggleTheme()">🌓 Toggle Theme</button>
+    
+    <header>
+        <h1>Emmanuel StMartin</h1>
+        <h2>Full Stack Engineer | Machine Learning Specialist</h2>
+        <p>
+            <a href="mailto:emmanuelstmartin6@gmail.com">emmanuelstmartin6@gmail.com</a><br>
+            📱 504.722.9940 | 🌍 Portland, OR<br>
+            <a href="https://emmanuelstmartin.com" class="pdf-download">View Portfolio</a>
+            <a href="resume.pdf" download class="pdf-download">Download PDF</a>
+        </p>
     </header>
 
-    <section id="about" class="cyber-border">
-        <h3>// Systems Architect</h3>
-        <p>Bridging hardware and software ecosystems with 6+ years experience in:</p>
+    <section id="skills">
+        <h3>Core Competencies</h3>
         <ul>
-            <li>ML Pipeline Development</li>
-            <li>Embedded Systems Design</li>
-            <li>Cybersecurity Infrastructure</li>
-            <li>Bilingual Client Solutions</li>
+            <li>Full-stack system design from UI/UX to hardware control</li>
+            <li>Expert in A/B testing and ML model evaluation</li>
+            <li>Bilingual client engagement (English/Spanish)</li>
+            <li>Market research & sales strategy development</li>
         </ul>
     </section>
 
-    <section id="skills">
-        <div class="cyber-border">
-            <h3>Core Tech Stack</h3>
-            <div class="skill-cloud">
-                <div class="skill-chip">TensorFlow</div>
-                <div class="skill-chip">FPGA Programming</div>
-                <div class="skill-chip">Django/Flask</div>
-                <!-- Add all skills from resume -->
-            </div>
-        </div>
-    </section>
-
     <section id="experience">
-        <div class="cyber-border">
-            <h3>Professional Timeline</h3>
-            <div class="timeline">
-                <article>
-                    <h4>Department of Defense</h4>
-                    <p>Optimized $2M+ equipment lifecycle management</p>
-                    <small>2025-Present</small>
-                </article>
-                <!-- Add other experiences -->
-            </div>
+        <h3>Professional Experience</h3>
+        
+        <div class="job">
+            <h4>Department of Defense - Technology Officer</h4>
+            <div class="date">January 2025 - Present | Portland, OR</div>
+            <ul>
+                <li>Real-time technical resolution for DOD systems/equipment</li>
+                <li>Equipment lifecycle management (reduce/repair/recycle)</li>
+                <li>Part-time contract position</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <h4>Zuwa Tax Consulting - Software Engineer, Tax Accuracy</h4>
+            <div class="date">February 2022 - December 2024 | Dallas, TX/NOLA</div>
+            <ul>
+                <li>Developed AI tax validation system with full-stack ownership</li>
+                <li>Managed complete business operations including ad campaigns</li>
+                <li>Integrated front-end UI with back-end database systems</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <h4>Steel Details Inc - Machine Learning Specialist</h4>
+            <div class="date">October 2019 - March 2021 | Upland, CA</div>
+            <ul>
+                <li>Developed structural failure prediction models</li>
+                <li>Implemented Django/Flask simulation systems</li>
+                <li>Participated in engineering hiring processes</li>
+            </ul>
         </div>
     </section>
 
-    <section id="projects">
-        <div class="cyber-border">
-            <h3>Key Projects</h3>
-            <div class="project-grid">
-                <article>
-                    <h4>Flux/Zygote ML Framework</h4>
-                    <p>Structural simulation pipeline with 98.2% accuracy</p>
-                    <button>View Case Study</button>
-                </article>
-            </div>
+    <section id="education">
+        <h3>Education & Certifications</h3>
+        <div class="job">
+            <h4>University of New Orleans</h4>
+            <div class="date">August 2021 - 2025</div>
+            <ul>
+                <li>Coursework: Marketing & Computer Science</li>
+                <li>Key Courses: Embedded Systems, Signal Processing, Control Systems</li>
+            </ul>
+        </div>
+        <div class="job">
+            <h4>Certifications</h4>
+            <ul>
+                <li>DoDM 8140.3</li>
+                <li>NICE Cybersecurity Framework</li>
+            </ul>
         </div>
     </section>
 
-    <footer class="cyber-border">
-        <h3>Connect</h3>
-        <a href="mailto:emmanuelstmartin6@gmail.com">📧 Secure Email</a>
-        <a href="https://github.com/yourusername">💻 GitHub</a>
-        <a href="/Emmanuel_StMartin_Resume.pdf">📄 Download Full Resume</a>
-    </footer>
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+        }
+        
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+        }
+    </script>
 </body>
 </html>
