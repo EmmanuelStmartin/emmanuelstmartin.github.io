@@ -181,26 +181,23 @@ function createCyberSkull() {
     const skull = new THREE.Mesh(skullGeometry, skullMaterial);
     scene.add(skull);
 
-    // Neural processor
-    const cpuGeometry = new THREE.BoxGeometry(0.5, 0.5, 0.1);
-    const cpuMaterial = new THREE.MeshBasicMaterial({ 
-        color: 0xE04831,
-        transparent: true,
-        opacity: 0.8
-    });
-    const neuralCPU = new THREE.Mesh(cpuGeometry, cpuMaterial);
-    neuralCPU.position.set(0, 0.5, 1.8);
-    scene.add(neuralCPU);
-
-    // Sensor array
+    // Sensor array (enhanced)
     const sensors = new THREE.Group();
-    for(let i = 0; i < 8; i++) {
+    for(let i = 0; i < 16; i++) { // Increased sensor count
         const sensor = new THREE.Mesh(
-            new THREE.SphereGeometry(0.1),
-            new THREE.MeshBasicMaterial({ color: 0xE04831 })
+            new THREE.SphereGeometry(0.1, 8, 8),
+            new THREE.MeshBasicMaterial({ 
+                color: 0xE04831,
+                transparent: true,
+                opacity: 0.8
+            })
         );
-        const angle = (i / 8) * Math.PI * 2;
-        sensor.position.set(Math.cos(angle)*1.5, Math.sin(angle)*1.5, 1.5);
+        const angle = (i / 16) * Math.PI * 2;
+        sensor.position.set(
+            Math.cos(angle)*2, 
+            Math.sin(angle)*2, 
+            1.5
+        );
         sensors.add(sensor);
     }
     scene.add(sensors);
@@ -210,7 +207,10 @@ function createCyberSkull() {
 
 // Initialize visualization
 const vizContainer = document.getElementById('viz-container');
-const renderer = new THREE.WebGLRenderer({ antialias: true });
+const renderer = new THREE.WebGLRenderer({ 
+    antialias: true,
+    alpha: true // Add transparency
+});
 renderer.setSize(vizContainer.offsetWidth, 500);
 vizContainer.prepend(renderer.domElement);
 
@@ -224,7 +224,6 @@ controls.enableDamping = true;
 // Hardware telemetry data
 const sensors = {
     neuralLoad: 0,
-    fpgaTemp: 45,
     dataThroughput: 0
 };
 
@@ -233,19 +232,18 @@ function updateTelemetry() {
     sensors.dataThroughput = Math.random() * 1e6;
     document.getElementById('sensor-data').innerHTML = `
         <div style="color: #E04831">Neural Load: ${sensors.neuralLoad.toFixed(1)}%</div>
-        <div>FPGA Temp: ${sensors.fpgaTemp.toFixed(1)}°C</div>
         <div>Throughput: ${(sensors.dataThroughput/1e6).toFixed(2)} Gb/s</div>
     `;
 }
 
-// Animation loop
+// Animation loop (simplified)
 function animate() {
     requestAnimationFrame(animate);
     controls.update();
     
-    // Animate components
-    scene.children[1].rotation.z += 0.01; // CPU rotation
-    scene.children[2].rotation.y += 0.02; // Sensors rotation
+    // Animate sensor array
+    scene.children[1].rotation.y += 0.02;
+    scene.children[1].rotation.x += 0.01;
     
     renderer.render(scene, camera);
     updateTelemetry();
@@ -274,9 +272,11 @@ animate();
     font-size: 0.9rem;
     border: 1px solid rgba(224, 72, 49, 0.3);
     backdrop-filter: blur(5px);
+    min-width: 200px;
 }
 
 canvas {
     border-radius: 8px;
+    background: transparent !important;
 }
 </style>
