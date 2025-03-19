@@ -1,1 +1,126 @@
-<h1>My Portfolio</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emmanuel StMartin | Full-Stack Engineer & ML Specialist</title>
+    <style>
+        :root {
+            --primary: #2A9D8F;
+            --secondary: #264653;
+            --accent: #E9C46A;
+        }
+        body {
+            font-family: 'Space Mono', monospace;
+            background: var(--secondary);
+            color: white;
+        }
+        .cyber-border {
+            border: 3px solid var(--primary);
+            position: relative;
+            padding: 2rem;
+            margin: 2rem 0;
+            background: rgba(0,0,0,0.7);
+        }
+        .cyber-border::before {
+            content: '';
+            position: absolute;
+            top: -5px; left: -5px;
+            right: -5px; bottom: -5px;
+            z-index: -1;
+            background: linear-gradient(45deg, 
+                var(--primary), 
+                var(--accent), 
+                var(--primary));
+        }
+        .skill-cloud {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            padding: 2rem;
+        }
+        .skill-chip {
+            background: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .timeline {
+            border-left: 3px solid var(--primary);
+            padding-left: 2rem;
+            margin-left: 1rem;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="cyber-border">
+        <h1>EMMANUEL ST.MARTIN</h1>
+        <h2>Full-Stack Engineer | Hardware Architect | ML Researcher</h2>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+        </nav>
+    </header>
+
+    <section id="about" class="cyber-border">
+        <h3>// Systems Architect</h3>
+        <p>Bridging hardware and software ecosystems with 6+ years experience in:</p>
+        <ul>
+            <li>ML Pipeline Development</li>
+            <li>Embedded Systems Design</li>
+            <li>Cybersecurity Infrastructure</li>
+            <li>Bilingual Client Solutions</li>
+        </ul>
+    </section>
+
+    <section id="skills">
+        <div class="cyber-border">
+            <h3>Core Tech Stack</h3>
+            <div class="skill-cloud">
+                <div class="skill-chip">TensorFlow</div>
+                <div class="skill-chip">FPGA Programming</div>
+                <div class="skill-chip">Django/Flask</div>
+                <!-- Add all skills from resume -->
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="cyber-border">
+            <h3>Professional Timeline</h3>
+            <div class="timeline">
+                <article>
+                    <h4>Department of Defense</h4>
+                    <p>Optimized $2M+ equipment lifecycle management</p>
+                    <small>2025-Present</small>
+                </article>
+                <!-- Add other experiences -->
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="cyber-border">
+            <h3>Key Projects</h3>
+            <div class="project-grid">
+                <article>
+                    <h4>Flux/Zygote ML Framework</h4>
+                    <p>Structural simulation pipeline with 98.2% accuracy</p>
+                    <button>View Case Study</button>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <footer class="cyber-border">
+        <h3>Connect</h3>
+        <a href="mailto:emmanuelstmartin6@gmail.com">📧 Secure Email</a>
+        <a href="https://github.com/yourusername">💻 GitHub</a>
+        <a href="/Emmanuel_StMartin_Resume.pdf">📄 Download Full Resume</a>
+    </footer>
+</body>
+</html>
