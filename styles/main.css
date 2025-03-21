@@ -1,1 +1,95 @@
+/* CSS Variables */
+:root {
+    --bg: #1a1a1a;
+    --text: #e6e6e6;
+    --accent: #E04831;
+    --link-underline: #4d4d4d;
+}
 
+/* Base Styles */
+body {
+    font-family: 'Space Mono', monospace;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    transition: background 0.3s, color 0.3s;
+}
+
+body.light-mode {
+    --bg: #ffffff;
+    --text: #333333;
+    --link-underline: #cccccc;
+}
+
+/* Header Styles */
+header { 
+    text-align: center; 
+    margin-bottom: 3rem; 
+}
+
+h1 { 
+    color: var(--accent); 
+    margin-bottom: 0; 
+}
+
+h2 { 
+    color: var(--text); 
+    margin-top: 0.5rem; 
+    opacity: 0.8; 
+}
+
+/* Section Styles */
+section { 
+    margin: 2rem 0; 
+}
+
+h3 { 
+    color: var(--accent); 
+    border-bottom: 2px solid var(--accent); 
+    padding-bottom: 0.5rem; 
+}
+
+/* Experience Styles */
+.job { 
+    margin: 2rem 0; 
+}
+
+.date { 
+    color: var(--text); 
+    opacity: 0.7; 
+    font-size: 0.9em; 
+}
+
+/* List Styles */
+ul { 
+    list-style: none; 
+    padding-left: 1rem; 
+}
+
+li::before { 
+    content: "▹"; 
+    color: var(--accent); 
+    padding-right: 0.5rem; 
+}
+
+/* Link Styles */
+a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid var(--link-underline);
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: 1px solid var(--text);
+    color: var(--text);
+    padding: 0.5rem;
+    cursor: pointer;
+}
