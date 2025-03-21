@@ -50,15 +50,7 @@
             padding: 0.5rem;
             cursor: pointer;
         }
-        .pdf-download {
-            display: inline-block;
-            margin: 1rem 0;
-            padding: 0.5rem 1rem;
-            background: var(--accent);
-            color: var(--bg);
-            border: none;
-            cursor: pointer;
-        }
+        /* Removed .pdf-download class */
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
 </head>
@@ -70,12 +62,12 @@
         <h2>Full Stack Engineer | Machine Learning Specialist</h2>
         <p>
             <a href="mailto:complaints@emmanuelstmartin.com">complaints@emmanuelstmartin.com</a><br>
-            📱 504.722.9940 | 🌍 Portland, OR<br>
-            <a href="https://emmanuelstmartin.com" class="pdf-download">View Portfolio</a>
-            <a href="resume.pdf" download class="pdf-download">Download PDF</a>
+            📱 504.722.9940 | 🌍 Portland, OR
+            <!-- Removed buttons -->
         </p>
     </header>
 
+    <!-- Rest of your content remains unchanged -->
     <section id="skills">
         <h3>Some things I'm good at</h3>
         <ul>
@@ -152,117 +144,3 @@
     </script>
 </body>
 </html>
-<!-- Add this section -->
-<section id="infinity-viz">
-    <h3>Infinite Systems Architecture</h3>
-    <div id="infinity-container" style="height: 500px; position: relative;">
-        <div id="data-panel" style="position: absolute; right: 20px; top: 20px; background: rgba(0,0,0,0.7); padding: 1rem; border-radius: 8px;">
-            <h4 style="color: #E04831; margin: 0 0 1rem 0;">System Status</h4>
-            <div id="cycle-data"></div>
-        </div>
-    </div>
-</section>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-<script>
-function createInfinitySymbol() {
-    const scene = new THREE.Scene();
-    
-    // Infinity symbol using torus knot
-    const geometry = new THREE.TorusKnotGeometry(1.5, 0.4, 256, 32, 2, 3);
-    const material = new THREE.MeshPhongMaterial({
-        color: 0x1a1a1a,
-        emissive: 0xE04831,
-        emissiveIntensity: 0.5,
-        wireframe: true
-    });
-    const infinity = new THREE.Mesh(geometry, material);
-    scene.add(infinity);
-
-    // Particles
-    const particles = new THREE.BufferGeometry();
-    const particlePositions = [];
-    for(let i = 0; i < 1000; i++) {
-        particlePositions.push(
-            (Math.random() - 0.5) * 10,
-            (Math.random() - 0.5) * 10,
-            (Math.random() - 0.5) * 10
-        );
-    }
-    particles.setAttribute('position', new THREE.Float32BufferAttribute(particlePositions, 3));
-    
-    const particleMaterial = new THREE.PointsMaterial({
-        color: 0xE04831,
-        size: 0.05,
-        transparent: true
-    });
-    const particleSystem = new THREE.Points(particles, particleMaterial);
-    scene.add(particleSystem);
-
-    return {scene, infinity, particleSystem};
-}
-
-// Initialize visualization
-const container = document.getElementById('infinity-container');
-const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-renderer.setSize(container.offsetWidth, 500);
-container.prepend(renderer.domElement);
-
-const camera = new THREE.PerspectiveCamera(75, container.offsetWidth / 500, 0.1, 1000);
-camera.position.z = 8;
-
-const {scene, infinity, particleSystem} = createInfinitySymbol();
-const controls = new THREE.OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true;
-
-// Animation
-let cycle = 0;
-function animate() {
-    requestAnimationFrame(animate);
-    
-    infinity.rotation.x += 0.005;
-    infinity.rotation.y += 0.005;
-    particleSystem.rotation.y += 0.001;
-    
-    cycle = (cycle + 0.01) % (Math.PI * 2);
-    const intensity = Math.sin(cycle) * 0.3 + 0.5;
-    infinity.material.emissiveIntensity = intensity;
-    
-    document.getElementById('cycle-data').innerHTML = `
-        <div style="color: #E04831">Energy Flow: ${(intensity * 100).toFixed(1)}%</div>
-        <div>Particle Count: 1,000</div>
-        <div>Orbit Stability: ${(100 - Math.abs(Math.sin(cycle)) * 20).toFixed(1)}%</div>
-    `;
-
-    controls.update();
-    renderer.render(scene, camera);
-}
-
-// Handle window resize
-window.addEventListener('resize', () => {
-    camera.aspect = container.offsetWidth / 500;
-    camera.updateProjectionMatrix();
-    renderer.setSize(container.offsetWidth, 500);
-});
-
-animate();
-</script>
-
-<style>
-#infinity-viz {
-    margin: 4rem 0;
-    border: 1px solid #E04831;
-    border-radius: 8px;
-    background: linear-gradient(45deg, 
-        rgba(32, 32, 32, 0.9) 0%,
-        rgba(0, 0, 0, 0.95) 100%
-    );
-}
-
-#data-panel {
-    font-family: 'Space Mono', monospace;
-    border: 1px solid rgba(224, 72, 49, 0.3);
-    backdrop-filter: blur(5px);
-}
-</style>
