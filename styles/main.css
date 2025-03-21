@@ -75,6 +75,17 @@ li::before {
     padding-right: 0.5rem; 
 }
 
+/* References Note */
+.references-note {
+    margin-top: 2rem;
+    font-style: italic;
+    color: var(--text);
+    opacity: 0.8;
+    text-align: center;
+    padding: 1rem 0;
+    border-top: 1px solid var(--link-underline);
+}
+
 /* Link Styles */
 a {
     color: inherit;
